@@ -152,6 +152,7 @@ function BookingPrice(barId, time, persons)
 {
   var pricePerHour;
   var pricePerPerson;
+  var bookingPrice;
   for(i=0; i<bars.length; i++)
   {
     if(bars[i].id === barId)
@@ -161,9 +162,31 @@ function BookingPrice(barId, time, persons)
     }
   }
 
-  var timeComponent = time * pricePerHour;
-  var peopleComponent = persons * pricePerPerson;
-  var bookingPrice = timeComponent+peopleComponent;
+  if(persons>10)
+  {
+    if(persons>20)
+    {
+      if(persons>60)
+      {
+        var timeComponent = time * pricePerHour;
+        var peopleComponent = persons * pricePerPerson * 0.5;
+      }
+      else{
+        var timeComponent = time * pricePerHour;
+        var peopleComponent = persons * pricePerPerson * 0.7;
+      }
+    }
+    else{
+      var timeComponent = time * pricePerHour;
+      var peopleComponent = persons * pricePerPerson * 0.9;
+    }
+  }
+  else{
+    var timeComponent = time * pricePerHour;
+    var peopleComponent = persons * pricePerPerson;
+  }
+
+  bookingPrice = timeComponent+peopleComponent;
 
   return bookingPrice;
 }
