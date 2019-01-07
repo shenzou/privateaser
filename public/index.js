@@ -148,7 +148,7 @@ const actors = [{
 
 var i;
 
-function BookingPrice(barId, time, persons)
+function BookingPrice(barId, time, persons, deductibleReduction)
 {
   var pricePerHour;
   var pricePerPerson;
@@ -187,7 +187,10 @@ function BookingPrice(barId, time, persons)
   }
 
   bookingPrice = timeComponent+peopleComponent;
-
+  if(deductibleReduction)
+  {
+    bookingPrice+=1;
+  }
 
   var commission = bookingPrice*0.3;
   var insurance = commission*0.5;
@@ -203,7 +206,8 @@ var j=0;
 
 for(j=0; j<events.length; j++)
 {
-  var values = BookingPrice(events[j].barId, events[j].time, events[j].persons)
+  var values = BookingPrice(events[j].barId, events[j].time, events[j].persons, events[j].deductibleReduction)
+
   events[j].price = values[0];
   events[j].commission.insurance = values[1];
   events[j].commission.treasury = values[2];
