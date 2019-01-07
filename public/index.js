@@ -194,15 +194,20 @@ function BookingPrice(barId, time, persons)
   var treasury = persons;
   var privateaser = commission - insurance - treasury;
 
- 
-  return bookingPrice;
+  var values = [bookingPrice, insurance, treasury, privateaser];
+
+  return values;
 }
 
 var j=0;
 
 for(j=0; j<events.length; j++)
 {
-  events[j].price = BookingPrice(events[j].barId, events[j].time, events[j].persons);
+  var values = BookingPrice(events[j].barId, events[j].time, events[j].persons)
+  events[j].price = values[0];
+  events[j].commission.insurance = values[1];
+  events[j].commission.treasury = values[2];
+  events[j].commission.privateaser = values[3];
 }
 
 console.log(bars);
