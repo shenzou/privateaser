@@ -188,6 +188,13 @@ function BookingPrice(barId, time, persons)
 
   bookingPrice = timeComponent+peopleComponent;
 
+
+  var commission = bookingPrice*0.3;
+  var insurance = commission*0.5;
+  var treasury = persons;
+  var privateaser = commission - insurance - treasury;
+
+ 
   return bookingPrice;
 }
 
