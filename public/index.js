@@ -187,10 +187,13 @@ function BookingPrice(barId, time, persons, deductibleReduction)
   }
 
   bookingPrice = timeComponent+peopleComponent;
+
+
   if(deductibleReduction)
   {
-    bookingPrice+=1;
+    bookingPrice += persons;
   }
+
 
   var commission = bookingPrice*0.3;
   var insurance = commission*0.5;
@@ -206,7 +209,7 @@ var j=0;
 
 for(j=0; j<events.length; j++)
 {
-  var values = BookingPrice(events[j].barId, events[j].time, events[j].persons, events[j].deductibleReduction)
+  var values = BookingPrice(events[j].barId, events[j].time, events[j].persons, events[j].options.deductibleReduction)
 
   events[j].price = values[0];
   events[j].commission.insurance = values[1];
