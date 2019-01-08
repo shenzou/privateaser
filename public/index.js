@@ -227,11 +227,11 @@ for(j=0; j<events.length; j++)
   {
     if(events[j].id === actors[k].eventId)
     {
-      actors[k].payment[0].amount = values[0];
-      actors[k].payment[1].amount = values[0] - values[4] - values[5];
-      actors[k].payment[2].amount = values[1];
-      actors[k].payment[3].amount = values[2];
-      actors[k].payment[4].amount = values[3];
+      actors[k].payment[0].amount = values[0]; //for the booker: booking price
+      actors[k].payment[1].amount = values[0] - values[4] - values[5]; //for the bar: bookingprice minus commission minus deductible reduction
+      actors[k].payment[2].amount = values[1]; //for the insurance: its part
+      actors[k].payment[3].amount = values[2]; //for the treasury: its part
+      actors[k].payment[4].amount = values[3]; //for privateaser: its part + deductible reduc if available
     }
   }
 }
