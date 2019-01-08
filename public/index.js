@@ -188,24 +188,29 @@ function BookingPrice(barId, time, persons, deductibleReduction)
 
   bookingPrice = timeComponent+peopleComponent;
 
+  var reduc = 0;
 
   if(deductibleReduction)
   {
-    bookingPrice += persons;
+    reduc += persons;
   }
+
 
 
   var commission = bookingPrice*0.3;
   var insurance = commission*0.5;
   var treasury = persons;
-  var privateaser = commission - insurance - treasury;
+  var privateaser = commission - insurance - treasury + reduc;
+  //bookingPrice+=reduc;
 
-  var values = [bookingPrice, insurance, treasury, privateaser];
+
+  var values = [bookingPrice, insurance, treasury, privateaser, commission, reduc];
 
   return values;
 }
 
 var j=0;
+
 
 for(j=0; j<events.length; j++)
 {
@@ -215,7 +220,23 @@ for(j=0; j<events.length; j++)
   events[j].commission.insurance = values[1];
   events[j].commission.treasury = values[2];
   events[j].commission.privateaser = values[3];
+
+  //Paying actors
+  var k=0;
+  for(k=0; k<actors.length; k++)
+  {
+    if(events[j].id === actors[k].eventId)
+    {
+      actors[k].payment[0].amount = values[0];
+      actors[k].payment[1].amount = values[0] - values[4] - values[5];
+      actors[k].payment[2].amount = values[1];
+      actors[k].payment[3].amount = values[2];
+      actors[k].payment[4].amount = values[3];
+    }
+  }
 }
+
+
 
 console.log(bars);
 console.log(events);
