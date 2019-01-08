@@ -201,7 +201,7 @@ function BookingPrice(barId, time, persons, deductibleReduction)
   var insurance = commission*0.5;
   var treasury = persons;
   var privateaser = commission - insurance - treasury + reduc;
-  //bookingPrice+=reduc;
+  bookingPrice+=reduc;
 
 
   var values = [bookingPrice, insurance, treasury, privateaser, commission, reduc];
